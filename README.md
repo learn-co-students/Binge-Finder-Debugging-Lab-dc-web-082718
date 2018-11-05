@@ -25,7 +25,7 @@ You now have a project with an unknown amount of bugs and your client is coming 
 
 ## BONUS
 
-LAZY LOADING!! Your initial fetch only grabbed the most popular 240 shows on the API. Implement lazy loading to have your application do another fetch once it gets to the botton of the screen.
+LAZY LOADING!! Your initial fetch only grabbed the most popular 240 shows on the API. Implement lazy loading to have your application do another fetch once it gets to the bottom of the screen.
 
 TIP change your fetch to reflect the page numbers example:
 http://api.tvmaze.com/shows?page=1
