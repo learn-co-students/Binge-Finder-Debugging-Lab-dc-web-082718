@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import {Grid} from 'semantic-ui-react';
+import TVShow from './TVShow'
 
 class TVShowList extends Component {
 
   mapAllShows = () => {
-    if (!!props.searchTerm){
-      props.shows.map((s) => {
-        if (s.name.toLowerCase().includes(props.searchTerm)){
-          (<TVShow show={s} key={s.id} selectShow={props.selectShow}/> )
-        }
-      })
+    if (this.props.searchTerm){
+      let searchedShows = this.props.shows.filter((show) => show.name.toLowerCase().includes(this.props.searchTerm.toLowerCase()))
+      return searchedShows.map(show => <TVShow show={show} key={show.id} selectShow={this.props.selectShow}/>)
+    } else {
+      return this.props.shows.map( show => <TVShow show={show} key={show.id} selectShow={this.props.selectShow}/>)
     }
-    return props.shows.map( (s)=> <TVShow show={s} key={s.id} selectShow={props.selectShow}/>)
   }
 
   render() {

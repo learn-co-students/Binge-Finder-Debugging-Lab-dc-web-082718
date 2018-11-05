@@ -13,18 +13,19 @@ class App extends Component {
     searchTerm: "",
     selectedShow: "",
     episodes: [],
-    filterByRating: "",
+    filterRating: "",
   }
 
   componentDidMount = () => {
-    Adapter.getShows().then(shows => this.setState({shows}))
+    Adapter.getShows()
+      .then(shows => this.setState({shows}))
   }
 
   componentDidUpdate = () => {
     window.scrollTo(0, 0)
   }
 
-  handleSearch (e){
+  handleSearch = (e) => {
     this.setState({ searchTerm: e.target.value.toLowerCase() })
   }
 
@@ -36,14 +37,14 @@ class App extends Component {
     Adapter.getShowEpisodes(show.id)
     .then((episodes) => this.setState({
       selectedShow: show,
-      episodes
+      episodes: episodes
     }))
   }
 
   displayShows = () => {
-    if (this.state.filterByRating){
+    if (this.state.filterRating){
       return this.state.shows.filter((s)=> {
-        return s.rating.average >= this.state.filterByRating
+        return s.rating.average >= this.state.filterRating
       })
     } else {
       return this.state.shows
@@ -53,7 +54,7 @@ class App extends Component {
   render (){
     return (
       <div>
-        <Nav handleFilter={this.handleFilter} handleSearch={this.handleSearch} searchTerm={this.state.searchTerm}/>
+        <Nav handleFilter={this.handleFilter} handleSearch={this.handleSearch} />
         <Grid celled>
           <Grid.Column width={5}>
             {!!this.state.selectedShow ? <SelectedShowContainer selectedShow={this.state.selectedShow} allEpisodes={this.state.episodes}/> : <div/>}
